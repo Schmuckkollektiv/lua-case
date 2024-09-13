@@ -1,3 +1,4 @@
+import LogoutButton from '../components/LogoutButton';
 import { useUser } from '../hooks/useUser';
 import './global.css';
 
@@ -15,7 +16,13 @@ export default async function RootLayout({
 
   return (
     <html lang="de">
-      <body>{children}</body>
+      <body className="flex flex-col">
+        <header className="flex justify-between items-center bg-[#f6ebe3] h-12 gap-2 p-2">
+          <h1>{metadata.title}</h1>
+          <LogoutButton />
+        </header>
+        <div className="m-2 flex-1">{children}</div>
+      </body>
     </html>
   );
 }

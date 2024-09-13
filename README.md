@@ -4,7 +4,16 @@
 
 This repo is for a case study at Luamaya. The goal of this project is to enable employees to book a desk in the office. They should be able to select the desk and book it for one or multiple days. Booking should only be possible for the upcoming 30 days.
 
-Please feel free to add features that you think would be great for the employees or admins.
+### Your tasks
+
+1. What could be improved in the sign-in process? Please implement your improvements.
+2. The schema is incomplete. Add the necessary models and relationships for booking desks.
+3. Update the front page to display only currently available desks.
+   Add a form to the front page where users can book a desk for a specific period.
+4. What could be improved in the current layout? Please implement your improvements, focusing on desktop users.
+5. Please add 1-2 additional features for users or admins that you think would be beneficial.
+
+Please feel free to use any libray you like.
 
 ## About this repo
 
