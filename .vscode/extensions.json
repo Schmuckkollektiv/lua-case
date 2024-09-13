@@ -3,6 +3,8 @@
     "nrwl.angular-console",
     "esbenp.prettier-vscode",
     "ms-playwright.playwright",
-    "firsttris.vscode-jest-runner"
+    "firsttris.vscode-jest-runner",
+    "Prisma.prisma",
+    "bradlc.vscode-tailwindcss"
   ]
 }

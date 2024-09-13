@@ -1,12 +1,19 @@
-# LuaCase
+<a alt="Nx logo" href="https://luamaya.com" target="_blank" rel="noreferrer"><img src="https://www.luamaya.com/cdn/shop/files/LUA_Wortmarke_474747_3.png?v=1723623328&width=250" width="250"></a>
 
-<a alt="Nx logo" href="https://nx.dev" target="_blank" rel="noreferrer"><img src="https://raw.githubusercontent.com/nrwl/nx/master/images/nx-logo.png" width="45"></a>
+## What is this all about?
 
-✨ Your new, shiny [Nx workspace](https://nx.dev) is ready ✨.
+This repo is for a case study at Luamaya. The goal of this project is to enable employees to book a desk in the office. They should be able to select the desk and book it for one or multiple days. Booking should only be possible for the upcoming 30 days.
 
-[Learn more about this workspace setup and its capabilities](https://nx.dev/nx-api/next?utm_source=nx_project&amp;utm_medium=readme&amp;utm_campaign=nx_projects) or run `npx nx graph` to visually explore what was created. Now, let's get you up to speed!
+Please feel free to add features that you think would be great for the employees or admins.
 
-## Run tasks
+## About this repo
+
+This is a monorepo using [Nx](https://nx.dev/). It uses [Next.js](https://nextjs.org/), [Prisma](https://www.prisma.io/), [Tailwind](https://tailwindcss.com/), and [shadcn/ui](https://ui.shadcn.com/).  
+The basic setup is already done for you.
+
+You can find the source of the Next.js app in `apps/lua-desk`. Everything related to the UI and shadcn is in a library located in `libs/ui-kit`.
+
+### Dev server / Builds
 
 To run the dev server for your app, use:
 
@@ -25,10 +32,45 @@ To see all available targets to run for a project, run:
 ```sh
 npx nx show project lua-desk
 ```
-        
+
 These targets are either [inferred automatically](https://nx.dev/concepts/inferred-tasks?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects) or defined in the `project.json` or `package.json` files.
 
 [More about running tasks in the docs &raquo;](https://nx.dev/features/run-tasks?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
+
+### shadcn
+
+To add new shadcn components, you can use the known commands in the root directory of this repo, e.g.:
+
+```sh
+npx shadcn@latest add card
+```
+
+### Prisma
+
+There is already a simple schema. You'll find it under `apps/lua-desk/prisma/schema.prisma`. There is also already a SQLite database in `apps/lua-desk/prisma/database/lua-desk.db`.
+
+To generate the schema, you should use:
+
+```sh
+npx nx run lua-desk:prisma-generate
+```
+
+To sync the schema with the database, you can use:
+
+```sh
+npx nx run lua-desk:prisma-push
+```
+
+There are other possibilities to sync the schema with the database. You can find useful commands in the project config in `apps/lua-desk/project.json`.
+
+## Configuration
+
+The only configuration that needs to be done is setting the environment variable `DATABASE_URL` to the absolute file path of the SQLite database mentioned above.  
+Use the `.env.local` file in the directory of the app.
+
+```sh
+DATABASE_URL=file:C:\Users\admin\lua-case\apps\lua-desk\prisma\database\lua-desk.db
+```
 
 ## Add new projects
 
@@ -49,53 +91,3 @@ npx nx g @nx/react:lib mylib
 ```
 
 You can use `npx nx list` to get a list of installed plugins. Then, run `npx nx list <plugin-name>` to learn about more specific capabilities of a particular plugin. Alternatively, [install Nx Console](https://nx.dev/getting-started/editor-setup?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects) to browse plugins and generators in your IDE.
-
-[Learn more about Nx plugins &raquo;](https://nx.dev/concepts/nx-plugins?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects) | [Browse the plugin registry &raquo;](https://nx.dev/plugin-registry?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-
-## Set up CI!
-
-### Step 1
-
-To connect to Nx Cloud, run the following command:
-
-```sh
-npx nx connect
-```
-
-Connecting to Nx Cloud ensures a [fast and scalable CI](https://nx.dev/ci/intro/why-nx-cloud?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects) pipeline. It includes features such as:
-
-- [Remote caching](https://nx.dev/ci/features/remote-cache?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-- [Task distribution across multiple machines](https://nx.dev/ci/features/distribute-task-execution?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-- [Automated e2e test splitting](https://nx.dev/ci/features/split-e2e-tasks?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-- [Task flakiness detection and rerunning](https://nx.dev/ci/features/flaky-tasks?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-
-### Step 2
-
-Use the following command to configure a CI workflow for your workspace:
-
-```sh
-npx nx g ci-workflow
-```
-
-[Learn more about Nx on CI](https://nx.dev/ci/intro/ci-with-nx#ready-get-started-with-your-provider?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-
-## Install Nx Console
-
-Nx Console is an editor extension that enriches your developer experience. It lets you run tasks, generate code, and improves code autocompletion in your IDE. It is available for VSCode and IntelliJ.
-
-[Install Nx Console &raquo;](https://nx.dev/getting-started/editor-setup?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-
-## Useful links
-
-Learn more:
-
-- [Learn more about this workspace setup](https://nx.dev/nx-api/next?utm_source=nx_project&amp;utm_medium=readme&amp;utm_campaign=nx_projects)
-- [Learn about Nx on CI](https://nx.dev/ci/intro/ci-with-nx?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-- [Releasing Packages with Nx release](https://nx.dev/features/manage-releases?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-- [What are Nx plugins?](https://nx.dev/concepts/nx-plugins?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-
-And join the Nx community:
-- [Discord](https://go.nx.dev/community)
-- [Follow us on X](https://twitter.com/nxdevtools) or [LinkedIn](https://www.linkedin.com/company/nrwl)
-- [Our Youtube channel](https://www.youtube.com/@nxdevtools)
-- [Our blog](https://nx.dev/blog?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
