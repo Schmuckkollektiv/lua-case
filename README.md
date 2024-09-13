@@ -8,7 +8,7 @@ Please feel free to add features that you think would be great for the employees
 
 ## About this repo
 
-This is a monorepo using [Nx](https://nx.dev/). It uses [Next.js](https://nextjs.org/), [Prisma](https://www.prisma.io/), [Tailwind](https://tailwindcss.com/), and [shadcn/ui](https://ui.shadcn.com/).  
+This is a monorepo using [Nx](https://nx.dev/). It uses [Next.js](https://nextjs.org/), [Prisma](https://www.prisma.io/), [Tailwind](https://tailwindcss.com/), [authjs](https://authjs.dev/) and [shadcn/ui](https://ui.shadcn.com/).  
 The basic setup is already done for you.
 
 You can find the source of the Next.js app in `apps/lua-desk`. Everything related to the UI and shadcn is in a library located in `libs/ui-kit`.
@@ -63,13 +63,18 @@ npx nx run lua-desk:prisma-push
 
 There are other possibilities to sync the schema with the database. You can find useful commands in the project config in `apps/lua-desk/project.json`.
 
+## authjs
+
+A basic auth is already configured . There is a user in the database with the mail admin@luamaya.com
+
 ## Configuration
 
-The only configuration that needs to be done is setting the environment variable `DATABASE_URL` to the absolute file path of the SQLite database mentioned above.  
+The only configuration that needs to be done is setting the environment variables `DATABASE_URL` to the absolute file path of the SQLite database mentioned above and and `AUTH_SECRET` to a random string.  
 Use the `.env.local` file in the directory of the app.
 
 ```sh
 DATABASE_URL=file:C:\Users\admin\lua-case\apps\lua-desk\prisma\database\lua-desk.db
+AUTH_SECRET=fasdfas54q35awsefgsdf
 ```
 
 ## Add new projects
