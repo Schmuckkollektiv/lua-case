@@ -1,12 +1,14 @@
-import { PrismaAdapter } from '@auth/prisma-adapter';
 import NextAuth from 'next-auth';
 import Credentials from 'next-auth/providers/credentials';
 import { v4 as uuid } from 'uuid';
 import { db } from './db';
 
 import { encode as defaultEncode } from 'next-auth/jwt';
+import { DRIZZLE_ADAPTER } from './src/db/adapter';
+import { eq } from 'drizzle-orm';
+import { users } from './src/db';
 
-const adapter = PrismaAdapter(db);
+const adapter = DRIZZLE_ADAPTER;
 
 export const { handlers, signIn, signOut, auth } = NextAuth({
   adapter,
@@ -41,7 +43,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
       return token;
     },
   },
-
+  secret: process.env.NEXTAUTH_SECRET ?? 'super-secret-key',
   providers: [
     Credentials({
       credentials: {
@@ -49,10 +51,8 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
         password: { label: 'Password', type: 'password' },
       },
       async authorize(credentials) {
-        const user = db.user.findFirst({
-          where: {
-            email: credentials.username as string,
-          },
+        const user = await db.query.users.findFirst({
+          where: eq(users.email, credentials?.username as string),
         });
 
         if (!user) {
