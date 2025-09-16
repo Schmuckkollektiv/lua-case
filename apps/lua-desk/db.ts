@@ -1,20 +1,10 @@
-import { PrismaClient } from '@lua-desk-db';
+import { createClient } from '@libsql/client';
+import { drizzle } from 'drizzle-orm/libsql';
+import * as schema from './src/db';
 
-declare global {
-  // eslint-disable-next-line no-var
-  var cachedPrisma: PrismaClient;
-}
+const client = createClient({
+  url: process.env.DATABASE_URL ?? '',
+  authToken: process.env.DATABASE_AUTH_TOKEN,
+});
 
-let primsa: PrismaClient;
-if (process.env.NODE_ENV == 'production') {
-  primsa = new PrismaClient();
-} else {
-  if (!global.cachedPrisma) {
-    global.cachedPrisma = new PrismaClient({
-      log: ['query', 'info', 'warn', 'error'],
-    });
-  }
-  primsa = global.cachedPrisma;
-}
-
-export const db = primsa;
+export const db = drizzle(client, { schema });

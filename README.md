@@ -16,8 +16,7 @@ This repo is for a case study at Luamaya. The goal of this project is to enable 
 Please feel free to use any libray you like.
 
 ## About this repo
-
-This is a monorepo using [Nx](https://nx.dev/). It uses [Next.js](https://nextjs.org/), [Prisma](https://www.prisma.io/), [Tailwind](https://tailwindcss.com/), [authjs](https://authjs.dev/) and [shadcn/ui](https://ui.shadcn.com/).  
+This is a monorepo using [Nx](https://nx.dev/). It uses [Next.js](https://nextjs.org/), [Drizzle](https://orm.drizzle.team/), [Tailwind](https://tailwindcss.com/), [authjs](https://authjs.dev/) and [shadcn/ui](https://ui.shadcn.com/).  
 The basic setup is already done for you.
 
 You can find the source of the Next.js app in `apps/lua-desk`. Everything related to the UI and shadcn is in a library located in `libs/ui-kit`.
@@ -54,39 +53,31 @@ To add new shadcn components, you can use the known commands in the root directo
 npx shadcn@latest add card
 ```
 
-### Prisma
+### Drizzle
 
-There is already a simple schema. You'll find it under `apps/lua-desk/prisma/schema.prisma`. There is also already a SQLite database in `apps/lua-desk/prisma/database/lua-desk.db`.
-
-To generate the schema, you should use:
-
-```sh
-npx nx run lua-desk:prisma-generate
-```
+There is already a simple schema. You'll find it under `apps/lua-desk/src/db/schema.ts`. There is also already a SQLite database in `apps/lua-desk/drizzle/database/lua-desk.db`.
 
 To sync the schema with the database, you can use:
 
 ```sh
-npx nx run lua-desk:prisma-push
+npx drizzle-kit push
 ```
 
-There are other possibilities to sync the schema with the database. You can find useful commands in the project config in `apps/lua-desk/project.json`.
+### authjs
 
-## authjs
+A basic auth is already configured. There is a user in the database with the mail `admin@luamaya.com`
 
-A basic auth is already configured . There is a user in the database with the mail admin@luamaya.com
+### Configuration
 
-## Configuration
-
-The only configuration that needs to be done is setting the environment variables `DATABASE_URL` to the absolute file path of the SQLite database mentioned above and and `AUTH_SECRET` to a random string.  
-Use the `.env.local` file in the directory of the app.
+The only configuration that needs to be done is setting the environment variables `DATABASE_URL` to the absolute file path of the SQLite database mentioned above and `DATABASE_AUTH_TOKEN` to a random string.  
+Create and use a `.env` file in the root directory of the app.
 
 ```sh
-DATABASE_URL=file:C:\Users\admin\lua-case\apps\lua-desk\prisma\database\lua-desk.db
-AUTH_SECRET=fasdfas54q35awsefgsdf
+DATABASE_URL=file:C:\Users\admin\lua-case\apps\lua-desk\drizzle\database\lua-desk.db
+DATABASE_AUTH_TOKEN=fasdfas54q35awsefgsdf
 ```
 
-## Add new projects
+### Add new projects
 
 While you could add new projects to your workspace manually, you might want to leverage [Nx plugins](https://nx.dev/concepts/nx-plugins?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects) and their [code generation](https://nx.dev/features/generate-code?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects) feature.
 

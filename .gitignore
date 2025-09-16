@@ -44,4 +44,5 @@ Thumbs.db
 # Next.js
 .next
 out
-.env.local
+apps/lua-desk/.env.local
+apps/lua-desk/.env
